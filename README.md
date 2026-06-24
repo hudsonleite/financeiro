@@ -23,6 +23,15 @@ No Windows, tambem e possivel dar dois cliques em `iniciar-projeto.bat` depois d
 - Aplicacao em React + Vite.
 - Salvamento local no navegador via `localStorage`.
 
+## Organizacao do projeto
+
+- `src/app`: composicao principal da aplicacao.
+- `src/components`: componentes reutilizaveis de layout e interface.
+- `src/features`: modulos por dominio do sistema, como dashboard, calendario e lancamentos.
+- `src/services`: integracoes e persistencia de dados.
+- `src/utils`: funcoes utilitarias puras, como datas, moeda e calculos.
+- `src/constants`: listas e valores fixos usados pelo sistema.
+
 ## Proximos passos
 
 - Ajustar o modelo dos lancamentos conforme as regras finais.
