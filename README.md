@@ -4,7 +4,14 @@ Primeira versao do sistema financeiro para controle diario de lancamentos.
 
 ## Como abrir
 
-De dois cliques em `iniciar-projeto.bat` ou abra o arquivo `index.html` no navegador.
+Instale as dependencias e inicie o servidor local:
+
+```bash
+pnpm install
+pnpm run dev
+```
+
+No Windows, tambem e possivel dar dois cliques em `iniciar-projeto.bat` depois de instalar as dependencias.
 
 ## O que ja existe
 
@@ -13,6 +20,7 @@ De dois cliques em `iniciar-projeto.bat` ou abra o arquivo `index.html` no naveg
 - Clique em um dia para abrir o modal de lancamento.
 - Cadastro inicial de lancamento com descricao, valor, tipo e forma de pagamento.
 - Listagem dos lancamentos do mes.
+- Aplicacao em React + Vite.
 - Salvamento local no navegador via `localStorage`.
 
 ## Proximos passos
