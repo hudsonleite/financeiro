@@ -1,0 +1,375 @@
+:root {
+  color-scheme: light;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: #f6f7f3;
+  color: #20231f;
+  line-height: 1.5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 28px 0 48px;
+}
+
+.topbar,
+.panel-header,
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.topbar {
+  margin-bottom: 22px;
+}
+
+.eyebrow {
+  display: block;
+  color: #657064;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.05;
+}
+
+h2 {
+  font-size: 1.35rem;
+}
+
+h3 {
+  font-size: 1rem;
+}
+
+.primary-action,
+.ghost-button,
+.icon-button {
+  border: 0;
+  border-radius: 8px;
+  min-height: 42px;
+}
+
+.primary-action {
+  background: #26533d;
+  color: #fff;
+  font-weight: 800;
+  padding: 0 18px;
+}
+
+.ghost-button {
+  background: #eef1ea;
+  color: #273128;
+  padding: 0 14px;
+}
+
+.icon-button {
+  display: inline-grid;
+  width: 42px;
+  place-items: center;
+  background: #e1e7dd;
+  color: #273128;
+  font-size: 1.35rem;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.metric-card {
+  display: grid;
+  gap: 10px;
+  min-height: 124px;
+  align-content: center;
+  border: 1px solid #dfe5da;
+  border-radius: 8px;
+  background: #fff;
+  padding: 18px;
+}
+
+.metric-card span {
+  color: #667063;
+  font-weight: 700;
+}
+
+.metric-card strong {
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  line-height: 1;
+}
+
+.metric-card.balance {
+  background: #213d31;
+  color: #fff;
+}
+
+.metric-card.balance span {
+  color: #c4d2c8;
+}
+
+.metric-card.income strong,
+.positive {
+  color: #167248;
+}
+
+.metric-card.expense strong,
+.negative {
+  color: #b73d30;
+}
+
+.calendar-panel,
+.list-panel {
+  border: 1px solid #dfe5da;
+  border-radius: 8px;
+  background: #fff;
+  padding: 18px;
+}
+
+.calendar-panel {
+  margin-bottom: 18px;
+}
+
+.month-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.calendar-weekdays,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.calendar-weekdays {
+  margin: 18px 0 8px;
+}
+
+.calendar-weekdays span {
+  color: #657064;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.day-cell {
+  display: grid;
+  gap: 4px;
+  min-height: 104px;
+  align-content: start;
+  border: 1px solid #dfe5da;
+  border-radius: 8px;
+  background: #fafbf8;
+  color: inherit;
+  padding: 10px;
+  text-align: left;
+}
+
+.day-cell:not(.muted):hover {
+  border-color: #26533d;
+  background: #f1f6ef;
+}
+
+.day-cell.muted {
+  background: transparent;
+  border-color: transparent;
+}
+
+.day-cell.today {
+  outline: 2px solid #26533d;
+}
+
+.day-number {
+  font-weight: 900;
+}
+
+.day-total {
+  color: #26533d;
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
+.day-count {
+  color: #657064;
+  font-size: 0.78rem;
+}
+
+.entry-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.entry-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid #e5eadf;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.entry-row div {
+  display: grid;
+  gap: 2px;
+}
+
+.entry-row span {
+  color: #667063;
+  font-size: 0.9rem;
+}
+
+.entry-row > span {
+  flex: 0 0 auto;
+  font-weight: 900;
+}
+
+.empty-state {
+  border: 1px dashed #cfd8ca;
+  border-radius: 8px;
+  color: #667063;
+  margin-top: 14px;
+  padding: 18px;
+  text-align: center;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgb(32 35 31 / 55%);
+  padding: 16px;
+}
+
+.modal {
+  width: min(620px, 100%);
+  max-height: min(760px, calc(100vh - 32px));
+  overflow: auto;
+  border-radius: 8px;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 20px 60px rgb(0 0 0 / 24%);
+}
+
+.entry-form {
+  display: grid;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.entry-form label {
+  display: grid;
+  gap: 6px;
+  color: #4b554b;
+  font-weight: 800;
+}
+
+.entry-form input,
+.entry-form select {
+  width: 100%;
+  border: 1px solid #cfd8ca;
+  border-radius: 8px;
+  background: #fff;
+  color: #20231f;
+  min-height: 44px;
+  padding: 0 12px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.modal-list {
+  border-top: 1px solid #e5eadf;
+  padding-top: 16px;
+}
+
+@media (max-width: 820px) {
+  .topbar,
+  .panel-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .calendar-grid,
+  .calendar-weekdays {
+    gap: 4px;
+  }
+
+  .day-cell {
+    min-height: 82px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 560px) {
+  .shell {
+    width: min(100% - 20px, 1180px);
+    padding-top: 18px;
+  }
+
+  .dashboard-grid,
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .calendar-panel,
+  .list-panel,
+  .modal {
+    padding: 14px;
+  }
+
+  .day-cell {
+    min-height: 68px;
+  }
+
+  .day-total,
+  .day-count {
+    font-size: 0.7rem;
+  }
+}
