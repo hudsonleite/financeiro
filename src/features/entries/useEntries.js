@@ -17,6 +17,17 @@ export function useEntries() {
     [entries, persistEntries],
   );
 
+  const deleteEntry = useCallback(
+    (entryId) => {
+      persistEntries(
+        entries.map((entry) =>
+          entry.id === entryId ? { ...entry, deletedAt: new Date().toISOString() } : entry,
+        ),
+      );
+    },
+    [entries, persistEntries],
+  );
+
   const entriesForDate = useCallback(
     (dateKey) =>
       entries
@@ -28,6 +39,7 @@ export function useEntries() {
   return {
     entries,
     addEntry,
+    deleteEntry,
     entriesForDate,
   };
 }

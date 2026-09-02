@@ -3,7 +3,7 @@ import { formatDate } from "../../utils/date.js";
 import { EntryForm } from "./EntryForm.jsx";
 import { EntryList } from "./EntryList.jsx";
 
-export function EntryModal({ dateKey, entries, onClose, onSave }) {
+export function EntryModal({ dateKey, entries, onClose, onDeleteEntry, onSave }) {
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <section
@@ -27,7 +27,7 @@ export function EntryModal({ dateKey, entries, onClose, onSave }) {
 
         <div className="modal-list">
           <h3>Lancamentos do dia</h3>
-          <EntryList entries={entries} />
+          <EntryList entries={entries} onDeleteEntry={onDeleteEntry} />
         </div>
       </section>
     </div>

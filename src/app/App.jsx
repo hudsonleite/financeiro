@@ -1,64 +1,51 @@
-import { useMemo, useState } from "react";
 import { Header } from "../components/layout/Header.jsx";
 import { Sidebar } from "../components/layout/Sidebar.jsx";
-import { CalendarSection } from "../features/calendar/CalendarSection.jsx";
-import { Dashboard } from "../features/dashboard/Dashboard.jsx";
-import { EntryListSection } from "../features/entries/EntryListSection.jsx";
 import { EntryModal } from "../features/entries/EntryModal.jsx";
-import { useEntries } from "../features/entries/useEntries.js";
-import { fromDateKey, toDateKey } from "../utils/date.js";
+import { DashboardPage } from "../pages/DashboardPage.jsx";
+import { EntriesPage } from "../pages/EntriesPage.jsx";
+import { useFinancialApp } from "./useFinancialApp.js";
+import { APP_VIEWS } from "./viewConfig.js";
 
 export function App() {
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [activeView, setActiveView] = useState("dashboard");
-  const { entries, addEntry, entriesForDate } = useEntries();
-
-  const monthEntries = useMemo(() => {
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-
-    return entries.filter((entry) => {
-      const date = fromDateKey(entry.date);
-      return date.getFullYear() === year && date.getMonth() === month;
-    });
-  }, [currentDate, entries]);
-
-  function changeMonth(direction) {
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + direction, 1));
-  }
-
-  const pageTitle = activeView === "dashboard" ? "Dashboard" : "Lan\u00e7amentos";
+  const app = useFinancialApp();
+  const pageTitle = APP_VIEWS[app.activeView].title;
 
   return (
-    <div className="app-layout">
-      <Sidebar activeView={activeView} onChangeView={setActiveView} />
+    <div className={`app-layout ${app.sidebarCollapsed ? "sidebar-collapsed" : ""}`}>
+      <Sidebar
+        activeView={app.activeView}
+        collapsed={app.sidebarCollapsed}
+        onChangeView={app.setActiveView}
+        onToggle={app.toggleSidebar}
+      />
 
       <main className="shell">
-        <Header title={pageTitle} onOpenToday={() => setSelectedDate(toDateKey(new Date()))} />
+        <Header
+          title={pageTitle}
+          onOpenToday={app.activeView === "launches" ? () => app.setSelectedDate(app.todayKey) : null}
+        />
 
-        {activeView === "dashboard" ? (
-          <Dashboard entries={monthEntries} todayEntries={entriesForDate(toDateKey(new Date()))} />
+        {app.activeView === "dashboard" ? (
+          <DashboardPage entries={app.monthEntries} todayEntries={app.entriesForDate(app.todayKey)} />
         ) : (
-          <>
-            <CalendarSection
-              currentDate={currentDate}
-              entriesForDate={entriesForDate}
-              onChangeMonth={changeMonth}
-              onCurrentMonth={() => setCurrentDate(new Date())}
-              onSelectDate={setSelectedDate}
-            />
-
-            <EntryListSection entries={monthEntries} />
-          </>
+          <EntriesPage
+            currentDate={app.currentDate}
+            entries={app.monthEntries}
+            entriesForDate={app.entriesForDate}
+            onChangeMonth={app.changeMonth}
+            onCurrentMonth={() => app.setCurrentDate(new Date())}
+            onDeleteEntry={app.deleteEntry}
+            onSelectDate={app.setSelectedDate}
+          />
         )}
 
-        {selectedDate ? (
+        {app.selectedDate ? (
           <EntryModal
-            dateKey={selectedDate}
-            entries={entriesForDate(selectedDate)}
-            onClose={() => setSelectedDate(null)}
-            onSave={addEntry}
+            dateKey={app.selectedDate}
+            entries={app.entriesForDate(app.selectedDate)}
+            onClose={() => app.setSelectedDate(null)}
+            onDeleteEntry={app.deleteEntry}
+            onSave={app.addEntry}
           />
         ) : null}
       </main>

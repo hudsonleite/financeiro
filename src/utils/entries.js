@@ -8,6 +8,6 @@ export function createEntry(entryData) {
 
 export function sumEntries(entries, type = null) {
   return entries
-    .filter((entry) => !type || entry.type === type)
+    .filter((entry) => !entry.deletedAt && (!type || entry.type === type))
     .reduce((total, entry) => total + entry.amount, 0);
 }

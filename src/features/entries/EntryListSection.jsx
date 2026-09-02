@@ -1,11 +1,11 @@
 import { PanelHeader } from "../../components/ui/PanelHeader.jsx";
 import { EntryList } from "./EntryList.jsx";
 
-export function EntryListSection({ entries }) {
+export function EntryListSection({ entries, onDeleteEntry }) {
   return (
     <section className="list-panel">
       <PanelHeader eyebrow="Ultimos registros" title="Lancamentos do mes" />
-      <EntryList entries={entries} />
+      <EntryList entries={entries} onDeleteEntry={onDeleteEntry} />
     </section>
   );
 }

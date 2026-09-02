@@ -25,9 +25,12 @@ No Windows, tambem e possivel dar dois cliques em `iniciar-projeto.bat` depois d
 
 ## Organizacao do projeto
 
-- `src/app`: composicao principal da aplicacao.
-- `src/components`: componentes reutilizaveis de layout e interface.
-- `src/features`: modulos por dominio do sistema, como dashboard, calendario e lancamentos.
+- `src/app`: composição principal, estado global da interface e configuração das telas.
+- `src/pages`: páginas que conectam os módulos de negócio à aplicação.
+- `src/components/layout`: componentes estruturais, como cabeçalho e menu lateral.
+- `src/components/ui`: componentes genéricos de interface.
+- `src/components/icons`: ícones reutilizáveis da aplicação.
+- `src/features`: módulos por domínio, como dashboard, calendário e lançamentos.
 - `src/services`: integracoes e persistencia de dados.
 - `src/utils`: funcoes utilitarias puras, como datas, moeda e calculos.
 - `src/constants`: listas e valores fixos usados pelo sistema.

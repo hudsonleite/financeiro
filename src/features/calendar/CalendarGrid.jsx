@@ -18,7 +18,11 @@ export function CalendarGrid({ currentDate, entriesForDate, onSelectDate }) {
     const date = new Date(year, month, day);
     const dateKey = toDateKey(date);
     const dailyEntries = entriesForDate(dateKey);
-    const dailyTotal = sumEntries(dailyEntries);
+    const activeEntries = dailyEntries.filter((entry) => !entry.deletedAt);
+    const dailyIncome = sumEntries(dailyEntries, "entrada");
+    const dailyExpense = sumEntries(dailyEntries, "saida");
+    const dailyTotal = dailyIncome - dailyExpense;
+    const totalVariant = dailyTotal > 0 ? "positive" : dailyTotal < 0 ? "negative" : "neutral";
     const isToday = dateKey === toDateKey(new Date());
 
     days.push(
@@ -28,8 +32,10 @@ export function CalendarGrid({ currentDate, entriesForDate, onSelectDate }) {
         onClick={() => onSelectDate(dateKey)}
       >
         <span className="day-number">{day}</span>
-        <span className="day-total">{dailyEntries.length ? formatCurrency(dailyTotal) : ""}</span>
-        <span className="day-count">{dailyEntries.length ? `${dailyEntries.length} lanc.` : ""}</span>
+        <span className={`day-total ${totalVariant}`}>
+          {activeEntries.length ? formatCurrency(dailyTotal) : ""}
+        </span>
+        <span className="day-count">{activeEntries.length ? `${activeEntries.length} lanc.` : ""}</span>
       </button>,
     );
   }
