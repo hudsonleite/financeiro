@@ -19,6 +19,17 @@ Construir um sistema financeiro para controlar lancamentos diarios.
 
 ## Organizacao atual
 
+## Atualizações da interface
+
+- Acentuação corrigida nos textos da interface, mantendo os valores internos dos registros salvos.
+- Lista mensal com rolagem e filtros combinados por tipo e forma de pagamento.
+- Seletores com visual unificado e navegação por teclado, compartilhados entre filtros e formulário.
+- Totalizadores compactos de entradas, saídas e saldo acima da listagem, respeitando os filtros e desconsiderando registros excluídos.
+- Navegação mensal com ícones e calendário responsivo para telas de 768 px, com ajuste final de aproximadamente 3 cm na altura.
+- Validação: build de produção concluído com sucesso.
+
+## Estrutura dos módulos
+
 - `src/app`: composicao principal da aplicacao.
 - `src/components`: componentes reutilizaveis de layout e interface.
 - `src/features`: modulos por dominio, como dashboard, calendario e lancamentos.

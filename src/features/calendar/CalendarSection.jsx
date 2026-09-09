@@ -15,18 +15,18 @@ export function CalendarSection({
   return (
     <section className="calendar-panel">
       <PanelHeader
-        eyebrow="Calendario"
+        eyebrow="Calendário"
         title={title}
         actions={
-          <div className="month-actions">
-            <IconButton label="Mes anterior" onClick={() => onChangeMonth(-1)}>
-              {"<"}
+          <div className="month-actions" role="group" aria-label="Navegação do calendário">
+            <IconButton label="Mês anterior" onClick={() => onChangeMonth(-1)}>
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m12 5-5 5 5 5" /></svg>
             </IconButton>
-            <button className="ghost-button" onClick={onCurrentMonth}>
-              Mes atual
+            <button className="month-current-button" type="button" onClick={onCurrentMonth}>
+              Mês atual
             </button>
-            <IconButton label="Proximo mes" onClick={() => onChangeMonth(1)}>
-              {">"}
+            <IconButton label="Próximo mês" onClick={() => onChangeMonth(1)}>
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m8 5 5 5-5 5" /></svg>
             </IconButton>
           </div>
         }

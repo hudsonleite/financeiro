@@ -8,6 +8,7 @@ export function CalendarGrid({ currentDate, entriesForDate, onSelectDate }) {
   const month = currentDate.getMonth();
   const firstDay = new Date(year, month, 1);
   const lastDay = new Date(year, month + 1, 0);
+  const weekCount = Math.ceil((firstDay.getDay() + lastDay.getDate()) / 7);
   const days = [];
 
   for (let i = 0; i < firstDay.getDay(); i += 1) {
@@ -35,7 +36,7 @@ export function CalendarGrid({ currentDate, entriesForDate, onSelectDate }) {
         <span className={`day-total ${totalVariant}`}>
           {activeEntries.length ? formatCurrency(dailyTotal) : ""}
         </span>
-        <span className="day-count">{activeEntries.length ? `${activeEntries.length} lanc.` : ""}</span>
+        <span className="day-count">{activeEntries.length ? `${activeEntries.length} lanç.` : ""}</span>
       </button>,
     );
   }
@@ -47,7 +48,7 @@ export function CalendarGrid({ currentDate, entriesForDate, onSelectDate }) {
           <span key={day}>{day}</span>
         ))}
       </div>
-      <div className="calendar-grid">{days}</div>
+      <div className="calendar-grid" style={{ "--calendar-row-extra": `${113 / weekCount}px` }}>{days}</div>
     </>
   );
 }

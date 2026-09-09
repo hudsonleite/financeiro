@@ -1,9 +1,9 @@
-export const WEEKDAYS = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"];
+export const WEEKDAYS = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
 export const MONTHS = [
   "Janeiro",
   "Fevereiro",
-  "Marco",
+  "Março",
   "Abril",
   "Maio",
   "Junho",

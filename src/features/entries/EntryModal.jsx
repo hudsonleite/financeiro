@@ -15,7 +15,7 @@ export function EntryModal({ dateKey, entries, onClose, onDeleteEntry, onSave })
       >
         <div className="modal-header">
           <div>
-            <span className="eyebrow">Novo lancamento</span>
+            <span className="eyebrow">Novo lançamento</span>
             <h2 id="modal-title">{formatDate(dateKey)}</h2>
           </div>
           <IconButton label="Fechar" onClick={onClose}>
@@ -26,7 +26,7 @@ export function EntryModal({ dateKey, entries, onClose, onDeleteEntry, onSave })
         <EntryForm dateKey={dateKey} onSave={onSave} />
 
         <div className="modal-list">
-          <h3>Lancamentos do dia</h3>
+          <h3>Lançamentos do dia</h3>
           <EntryList entries={entries} onDeleteEntry={onDeleteEntry} />
         </div>
       </section>

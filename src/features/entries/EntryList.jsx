@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { formatPaymentMethod } from "../../constants/entries.js";
 import { AppIcon } from "../../components/icons/AppIcon.jsx";
 import { formatDate } from "../../utils/date.js";
 import { formatCurrency } from "../../utils/money.js";
@@ -20,7 +21,7 @@ export function EntryList({ entries, onDeleteEntry }) {
     event.preventDefault();
 
     if (username !== "admin" || password !== "admin") {
-      setError("Usuario ou senha invalidos.");
+      setError("Usuário ou senha inválidos.");
       return;
     }
 
@@ -29,7 +30,7 @@ export function EntryList({ entries, onDeleteEntry }) {
   }
 
   if (!entries.length) {
-    return <div className="empty-state">Nenhum lancamento neste periodo. Clique em um dia para comecar.</div>;
+    return <div className="empty-state">Nenhum lançamento neste período. Clique em um dia para começar.</div>;
   }
 
   return (
@@ -47,9 +48,9 @@ export function EntryList({ entries, onDeleteEntry }) {
                 <AppIcon name={entry.type === "entrada" ? "income" : "expense"} />
               </span>
               <div className="entry-copy">
-                <strong>{entry.description}</strong>
+                <strong>{formatPaymentMethod(entry.description)}</strong>
                 <span>
-                  {formatDate(entry.date)} - {entry.method}
+                  {formatDate(entry.date)} - {formatPaymentMethod(entry.method)}
                 </span>
               </div>
             </div>
@@ -60,7 +61,7 @@ export function EntryList({ entries, onDeleteEntry }) {
               {!entry.deletedAt ? (
                 <button
                   className="entry-delete-button"
-                  aria-label={`Excluir lançamento ${entry.description}`}
+                  aria-label={`Excluir lançamento ${formatPaymentMethod(entry.description)}`}
                   title="Excluir lançamento"
                   onClick={() => setSelectedEntry(entry)}
                   type="button"
@@ -81,10 +82,10 @@ export function EntryList({ entries, onDeleteEntry }) {
             aria-labelledby="delete-title"
             onClick={(event) => event.stopPropagation()}
           >
-            <span className="eyebrow">Confirmacao de seguranca</span>
+            <span className="eyebrow">Confirmação de segurança</span>
             <h2 id="delete-title">Excluir lançamento?</h2>
             <p>
-              O registro <strong>{selectedEntry.description}</strong> ficará visível, marcado como excluído,
+              O registro <strong>{formatPaymentMethod(selectedEntry.description)}</strong> ficará visível, marcado como excluído,
               e não será considerado nos totais.
             </p>
 

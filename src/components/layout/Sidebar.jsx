@@ -8,7 +8,7 @@ export function Sidebar({ activeView, collapsed, onChangeView, onToggle }) {
       <div className="sidebar-top">
         <div className="sidebar-brand">
           <span className="brand-mark"><AppIcon name="finance" /></span>
-          <div className="brand-copy"><strong>Finan</strong><small>Gest\u00e3o financeira</small></div>
+          <div className="brand-copy"><strong>Finan</strong><small>Gestão financeira</small></div>
         </div>
         <button className="sidebar-toggle" onClick={onToggle} aria-label={collapsed ? "Expandir menu" : "Recolher menu"}>
           <AppIcon name="chevron" />

@@ -1,4 +1,4 @@
-import { ENTRY_TYPES, PAYMENT_METHODS } from "../../constants/entries.js";
+import { EntrySelectFields } from "./EntrySelectFields.jsx";
 import { parseMoney } from "../../utils/money.js";
 
 export function EntryForm({ dateKey, onSave }) {
@@ -31,31 +31,14 @@ export function EntryForm({ dateKey, onSave }) {
     <form className="entry-form" onSubmit={handleSubmit}>
       <input type="hidden" name="date" value={dateKey} />
       <div className="form-grid">
-        <label>
-          Tipo
-          <select name="type">
-            {ENTRY_TYPES.map((type) => (
-              <option value={type.value} key={type.value}>
-                {type.label}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Forma
-          <select name="method">
-            {PAYMENT_METHODS.map((method) => (
-              <option key={method}>{method}</option>
-            ))}
-          </select>
-        </label>
+        <EntrySelectFields />
       </div>
       <label>
         Valor
         <input name="amount" type="text" inputMode="decimal" placeholder="0,00" required />
       </label>
       <button className="primary-action" type="submit">
-        Salvar lancamento
+        Salvar lançamento
       </button>
     </form>
   );
