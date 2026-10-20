@@ -8,7 +8,11 @@ export function formatCurrency(value) {
 }
 
 export function parseMoney(value) {
-  const normalized = value.replace(/\./g, "").replace(",", ".");
+  if (typeof value !== "string") return NaN;
+  const clean = value.trim();
+  if (!/^(?:\d{1,3}(?:\.\d{3})+|\d+)(?:,\d{1,2})?$/.test(clean) &&
+      !/^\d+\.\d{1,2}$/.test(clean)) return NaN;
+  const normalized = clean.includes(",") ? clean.replace(/\./g, "").replace(",", ".") : clean;
   const number = Number(normalized);
-  return Number.isFinite(number) ? number : 0;
+  return Number.isFinite(number) ? number : NaN;
 }
