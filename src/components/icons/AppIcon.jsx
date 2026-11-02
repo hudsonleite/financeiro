@@ -1,4 +1,6 @@
 const paths = {
+  columns: "M3 3h2v16h16v2H3V3Zm4 8h3v6H7v-6Zm5-6h3v12h-3V5Zm5 3h3v9h-3V8Z",
+  lines: "M3 3h2v16h16v2H3V3Zm3 11 5-6 4 3 5-7 1.6 1.2-6.2 8.6-4.1-3.1-3.8 4.6L6 14Z",
   dashboard: "M4 13h6V4H4v9Zm0 7h6v-5H4v5Zm10 0h6v-9h-6v9Zm0-16v5h6V4h-6Z",
   entries: "M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Zm3 4v2h8V8H8Zm0 4v2h8v-2H8Zm0 4v2h5v-2H8Z",
   chevron: "m15 18-6-6 6-6",
