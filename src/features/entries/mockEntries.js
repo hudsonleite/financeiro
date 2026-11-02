@@ -25,16 +25,17 @@ export function appendMockExpenses(entries, today = new Date()) {
   return next;
 }
 
-export function generateMockEntries(endDate = new Date(2026, 9, 18)) {
+export function generateMockEntries(endDate = new Date(2026, 9, 18), startDate = new Date(2026, 8, 1)) {
   const lastBlockStart = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
   lastBlockStart.setDate(lastBlockStart.getDate() - 6);
   const records = [];
-  for (let week = 0; week < 7; week++) {
+  const startKey = toDateKey(startDate);
+  for (let week = 0; toDateKey(new Date(lastBlockStart.getFullYear(), lastBlockStart.getMonth(), lastBlockStart.getDate() - week * 7 + 6)) >= startKey; week++) {
     for (let day = 0; day < 7; day++) {
       const date = new Date(lastBlockStart);
       date.setDate(date.getDate() - week * 7 + day);
       const dateKey = toDateKey(date);
-      if (dateKey < "2026-09-01") continue;
+      if (dateKey < startKey) continue;
       const income = 4200 + ((week * 937 + day * 613) % 4200);
       const expense = day === 4 && week === 2 ? income + 900 : 1800 + ((week * 479 + day * 367) % 2800);
       const items = [
@@ -54,7 +55,7 @@ export function generateMockEntries(endDate = new Date(2026, 9, 18)) {
   return records;
 }
 
-export function appendMockEntries(entries, endDate = new Date(2026, 9, 18)) {
+export function appendMockEntries(entries, endDate = new Date(2026, 9, 18), startDate = new Date(2026, 8, 1)) {
   const ids = new Set(entries.map((entry) => entry.id));
-  return [...entries, ...generateMockEntries(endDate).filter((entry) => !ids.has(entry.id))];
+  return [...entries, ...generateMockEntries(endDate, startDate).filter((entry) => !ids.has(entry.id))];
 }

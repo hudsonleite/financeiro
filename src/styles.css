@@ -205,6 +205,8 @@ h3 { font-size: 1rem; }
 }
 .weekly-chart { padding: 24px; border: 1px solid #e0e8eb; border-radius: 16px; background: #fff; box-shadow: 0 8px 24px rgb(31 56 66 / 4%); }
 .weekly-chart .select-field { width: 230px; flex-shrink: 0; }
+.column-comparison-filters { margin-bottom: 16px; }
+.column-comparison-filters .select-field { width: 270px; }
 .result-chart-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 22px 0 16px; padding-bottom: 10px; border-bottom: 1px solid #e0e8eb; }
 .result-chart-tabs button { display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 0 16px; border: 1px solid transparent; border-radius: 10px; background: transparent; color: #647780; font-weight: 650; font-size: .85rem; }
 .result-chart-tabs button svg { width: 19px; height: 19px; flex-shrink: 0; }

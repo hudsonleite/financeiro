@@ -13,7 +13,7 @@ export function App() {
   function loadExamples() {
     try {
       const count = app.loadMockEntries();
-      setMockMessage(count ? `${count} lançamentos de exemplo adicionados: entradas e saídas de 01/09 a 18/10/2026 e saídas de 18/10 até hoje.` : "Todos os exemplos desse período já foram carregados.");
+      setMockMessage(count ? `${count} lançamentos de exemplo adicionados: histórico de 01/01/2024 a 01/09/2026, exemplos até 18/10/2026 e saídas até hoje.` : "Todos os exemplos desse período já foram carregados.");
     } catch (error) { setMockMessage(error.message); }
   }
   const pageTitle = APP_VIEWS[app.activeView].title;

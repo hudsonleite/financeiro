@@ -22,7 +22,8 @@ export function useEntries() {
     persistEntries([...current.current, createEntry(data)]);
   }, [persistEntries]);
   const loadMockEntries = useCallback(() => {
-    const next = appendMockExpenses(appendMockEntries(current.current));
+    const historical = appendMockEntries(current.current, new Date(2026, 8, 1), new Date(2024, 0, 1));
+    const next = appendMockExpenses(appendMockEntries(historical));
     const count = next.length - current.current.length;
     persistEntries(next);
     return count;
