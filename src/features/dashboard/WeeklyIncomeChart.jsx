@@ -20,7 +20,7 @@ export function WeeklyIncomeChart({ entries }) {
   const expenses = getWeeklyIncome(entries, Number(previousWeeks), today, "saida");
   const weeks = incomes.map((week, index) => ({ income: week.total, expense: expenses[index].total,
     start: week.days[0].date, end: week.days[6].date, current: index === 0,
-  })).reverse();
+  }));
   const maximum = Math.max(1, ...weeks.flatMap((week) => [week.income, week.expense]));
   const magnitude = 10 ** Math.floor(Math.log10(maximum));
   const top = Math.ceil(maximum / magnitude) * magnitude;
@@ -54,7 +54,7 @@ export function WeeklyIncomeChart({ entries }) {
     <ul className="weekly-chart-legend">{series.map((item) => <li key={item.key}><span className="weekly-chart-swatch" style={{ background: item.color }} /><span>{item.label}</span></li>)}</ul>
     {!weeks.some((week) => week.income || week.expense) && <p className="weekly-chart-empty">Nenhum lançamento registrado nas semanas selecionadas.</p>}
     <div className="weekly-chart-scroll" tabIndex="0" role="region" aria-label="Gráfico de totais semanais com rolagem horizontal">
-      <svg className="weekly-chart-svg" style={{ minWidth: width }} viewBox={`0 0 ${width} 355`} role="img" aria-label="Entradas e saídas totais por semana, em ordem cronológica. Valores detalhados na tabela abaixo.">
+      <svg className="weekly-chart-svg" style={{ minWidth: width }} viewBox={`0 0 ${width} 355`} role="img" aria-label="Entradas e saídas totais por semana, começando pela semana atual e seguindo pelas anteriores. Valores detalhados na tabela abaixo.">
         {Array.from({ length: 5 }, (_, i) => {
           const amount = top * i / 4;
           return <g key={i}><line x1="90" x2={width - 10} y1={y(amount)} y2={y(amount)} stroke="#e5ecee" strokeDasharray="4 4" /><text x="80" y={y(amount) + 4} textAnchor="end">{compactCurrency.format(amount)}</text></g>;

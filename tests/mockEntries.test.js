@@ -1,7 +1,19 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { generateMockEntries, appendMockEntries } from "../src/features/entries/mockEntries.js";
+import { generateMockEntries, appendMockEntries, appendMockExpenses } from "../src/features/entries/mockEntries.js";
 import { validateEntries } from "../src/utils/entryValidation.js";
+
+test("expense examples cover October 18 through today inclusively without duplicates", () => {
+  const today = new Date(2026, 10, 2);
+  const records = appendMockExpenses([], today);
+  validateEntries(records);
+  assert.equal(records.length, 32);
+  assert.ok(records.every((entry) => entry.type === "saida" && entry.date >= "2026-10-18" && entry.date <= "2026-11-02"));
+  assert.equal(records.filter((entry) => entry.date === "2026-10-18").length, 2);
+  assert.equal(records.filter((entry) => entry.date === "2026-11-02").length, 2);
+  assert.deepEqual(appendMockExpenses(records, today), records);
+  assert.equal(appendMockExpenses(records, new Date(2026, 10, 3)).length, 34);
+});
 
 test("examples cover September 1 to October 18 and preserve existing records without duplicates", () => {
   const mock = generateMockEntries();

@@ -13,7 +13,7 @@ export function App() {
   function loadExamples() {
     try {
       const count = app.loadMockEntries();
-      setMockMessage(count ? `${count} lançamentos de exemplo adicionados entre 01/09/2026 e 18/10/2026. Compare com pelo menos 3 semanas anteriores para ver 12/10 até 18/10.` : "Os exemplos de 01/09/2026 a 18/10/2026 já foram carregados. Compare com pelo menos 3 semanas anteriores para ver 12/10 até 18/10.");
+      setMockMessage(count ? `${count} lançamentos de exemplo adicionados: entradas e saídas de 01/09 a 18/10/2026 e saídas de 18/10 até hoje.` : "Todos os exemplos desse período já foram carregados.");
     } catch (error) { setMockMessage(error.message); }
   }
   const pageTitle = APP_VIEWS[app.activeView].title;
@@ -29,7 +29,7 @@ export function App() {
 
       <main className="shell">
         <button className="ghost-button" type="button" onClick={app.exportBackup}>Exportar backup dos registros</button>
-        <button className="ghost-button" type="button" onClick={loadExamples}>Carregar exemplos de 01/09 a 18/10</button>
+        <button className="ghost-button" type="button" onClick={loadExamples}>Carregar exemplos</button>
         {mockMessage ? <p role="status">{mockMessage}</p> : null}
         {app.storageError ? <p role="alert">{app.storageError}</p> : null}
         <Header

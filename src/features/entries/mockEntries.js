@@ -1,5 +1,30 @@
 import { toDateKey } from "../../utils/date.js";
 
+export function appendMockExpenses(entries, today = new Date()) {
+  const ids = new Set(entries.map((entry) => entry.id));
+  const next = [...entries];
+  const date = new Date(2026, 9, 18);
+  const end = toDateKey(today);
+  let day = 0;
+  while (toDateKey(date) <= end) {
+    const key = toDateKey(date);
+    const items = [
+      { method: "Pix", description: "Fornecedor", amount: 1800 + day * 137 % 1900 },
+      { method: "Dinheiro", description: "Transporte e operação", amount: 250 + day * 53 % 450 },
+    ];
+    items.forEach((item, index) => {
+      const id = `mock-expense-${key}-${index}`;
+      if (!ids.has(id)) next.push({ ...item, id, type: "saida", date: key,
+        description: `[EXEMPLO] ${item.description}`,
+        createdAt: new Date(date.getFullYear(), date.getMonth(), date.getDate(), 9, index).toISOString(),
+      });
+    });
+    date.setDate(date.getDate() + 1);
+    day++;
+  }
+  return next;
+}
+
 export function generateMockEntries(endDate = new Date(2026, 9, 18)) {
   const lastBlockStart = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
   lastBlockStart.setDate(lastBlockStart.getDate() - 6);

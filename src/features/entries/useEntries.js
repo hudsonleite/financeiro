@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from "react";
 import { loadEntries, saveEntries, exportEntries } from "../../services/entriesStorage.js";
 import { createEntry, markEntryDeleted } from "../../utils/entries.js";
-import { appendMockEntries } from "./mockEntries.js";
+import { appendMockEntries, appendMockExpenses } from "./mockEntries.js";
 
 export function useEntries() {
   const [initial] = useState(() => {
@@ -22,7 +22,7 @@ export function useEntries() {
     persistEntries([...current.current, createEntry(data)]);
   }, [persistEntries]);
   const loadMockEntries = useCallback(() => {
-    const next = appendMockEntries(current.current);
+    const next = appendMockExpenses(appendMockEntries(current.current));
     const count = next.length - current.current.length;
     persistEntries(next);
     return count;
