@@ -7,7 +7,7 @@ export function useFinancialApp() {
   const [selectedDate, setSelectedDate] = useState(null);
   const [activeView, setActiveView] = useState("dashboard");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
-  const { entries, addEntry, deleteEntry, entriesForDate } = useEntries();
+  const { entries, addEntry, deleteEntry, entriesForDate, storageError, exportBackup, loadMockEntries } = useEntries();
 
   const todayKey = toDateKey(new Date());
   const monthEntries = useMemo(() => {
@@ -25,6 +25,10 @@ export function useFinancialApp() {
   }
 
   return {
+    loadMockEntries,
+    entries,
+    storageError,
+    exportBackup,
     activeView,
     addEntry,
     changeMonth,

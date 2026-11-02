@@ -41,3 +41,12 @@ No Windows, tambem e possivel dar dois cliques em `iniciar-projeto.bat` depois d
 - Definir totais por Dinheiro, Pix, Debito, Credito, Rede, Stone e outros.
 - Adicionar edicao/exclusao de lancamentos.
 - Evoluir para banco de dados quando a estrutura estiver fechada.
+
+## Fase 1 — segurança e estabilidade (parcial)
+
+- Exclusão local com confirmação: mantém o registro marcado com data de exclusão e o desconsidera nos totais e no gráfico. Não exige senha; os dados permanecem no navegador, sem autenticação no servidor.
+- Validação de datas, valores em reais, tipos, formas de pagamento, identificadores e datas de auditoria.
+- Falhas de leitura bloqueiam gravações para preservar os dados originais. Falhas de gravação mantêm o estado anterior e os campos do formulário.
+- Botão "Exportar backup dos registros" baixa o conteúdo original do armazenamento, inclusive se estiver corrompido. Guarde esse JSON antes de migrar. O backup corresponde ao navegador e à origem (host/porta) abertos; outros navegadores precisam de exportação própria.
+- Nenhuma migração executada nesta fase.
+- Testes: `node --test` (ou `pnpm test`).

@@ -5,9 +5,17 @@ import { DashboardPage } from "../pages/DashboardPage.jsx";
 import { EntriesPage } from "../pages/EntriesPage.jsx";
 import { useFinancialApp } from "./useFinancialApp.js";
 import { APP_VIEWS } from "./viewConfig.js";
+import { useState } from "react";
 
 export function App() {
   const app = useFinancialApp();
+  const [mockMessage, setMockMessage] = useState("");
+  function loadExamples() {
+    try {
+      const count = app.loadMockEntries();
+      setMockMessage(count ? `${count} lançamentos de exemplo adicionados entre 01/09/2026 e 18/10/2026. Compare com pelo menos 3 semanas anteriores para ver 12/10 até 18/10.` : "Os exemplos de 01/09/2026 a 18/10/2026 já foram carregados. Compare com pelo menos 3 semanas anteriores para ver 12/10 até 18/10.");
+    } catch (error) { setMockMessage(error.message); }
+  }
   const pageTitle = APP_VIEWS[app.activeView].title;
 
   return (
@@ -20,13 +28,17 @@ export function App() {
       />
 
       <main className="shell">
+        <button className="ghost-button" type="button" onClick={app.exportBackup}>Exportar backup dos registros</button>
+        <button className="ghost-button" type="button" onClick={loadExamples}>Carregar exemplos de 01/09 a 18/10</button>
+        {mockMessage ? <p role="status">{mockMessage}</p> : null}
+        {app.storageError ? <p role="alert">{app.storageError}</p> : null}
         <Header
           title={pageTitle}
           onOpenToday={app.activeView === "launches" ? () => app.setSelectedDate(app.todayKey) : null}
         />
 
         {app.activeView === "dashboard" ? (
-          <DashboardPage entries={app.monthEntries} todayEntries={app.entriesForDate(app.todayKey)} />
+          <DashboardPage entries={app.monthEntries} allEntries={app.entries} todayEntries={app.entriesForDate(app.todayKey)} />
         ) : (
           <EntriesPage
             currentDate={app.currentDate}

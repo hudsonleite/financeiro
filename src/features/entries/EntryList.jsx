@@ -6,27 +6,26 @@ import { formatCurrency } from "../../utils/money.js";
 
 export function EntryList({ entries, onDeleteEntry }) {
   const [selectedEntry, setSelectedEntry] = useState(null);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+
+
   const [error, setError] = useState("");
 
   function closeConfirmation() {
     setSelectedEntry(null);
-    setUsername("");
-    setPassword("");
+
+
     setError("");
   }
 
   function confirmDeletion(event) {
     event.preventDefault();
 
-    if (username !== "admin" || password !== "admin") {
-      setError("Usuário ou senha inválidos.");
-      return;
+    try {
+      onDeleteEntry(selectedEntry.id);
+      closeConfirmation();
+    } catch (failure) {
+      setError(failure.message);
     }
-
-    onDeleteEntry(selectedEntry.id);
-    closeConfirmation();
   }
 
   if (!entries.length) {
@@ -82,7 +81,7 @@ export function EntryList({ entries, onDeleteEntry }) {
             aria-labelledby="delete-title"
             onClick={(event) => event.stopPropagation()}
           >
-            <span className="eyebrow">Confirmação de segurança</span>
+            <span className="eyebrow">Confirmação de exclusão</span>
             <h2 id="delete-title">Excluir lançamento?</h2>
             <p>
               O registro <strong>{formatPaymentMethod(selectedEntry.description)}</strong> ficará visível, marcado como excluído,
@@ -90,18 +89,7 @@ export function EntryList({ entries, onDeleteEntry }) {
             </p>
 
             <form className="confirmation-form" onSubmit={confirmDeletion}>
-              <label>
-                Usuário
-                <input autoFocus value={username} onChange={(event) => setUsername(event.target.value)} />
-              </label>
-              <label>
-                Senha
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                />
-              </label>
+              <p>A alteração será salva neste navegador.</p>
               {error ? <span className="confirmation-error" role="alert">{error}</span> : null}
               <div className="confirmation-actions">
                 <button className="ghost-button" onClick={closeConfirmation} type="button">Cancelar</button>

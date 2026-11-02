@@ -203,3 +203,38 @@ h3 { font-size: 1rem; }
   .day-total { font-size: .62rem; }
   .day-count { font-size: .6rem; }
 }
+.weekly-chart { padding: 24px; border: 1px solid #e0e8eb; border-radius: 16px; background: #fff; box-shadow: 0 8px 24px rgb(31 56 66 / 4%); }
+.weekly-chart .select-field { width: 230px; flex-shrink: 0; }
+.weekly-comparison-legend { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; list-style: none; padding: 18px 0 0; margin: 12px 0 0; border-top: 1px solid #edf1f2; }
+.weekly-comparison-legend li { display: grid; gap: 5px; font-size: .82rem; }
+.weekly-comparison-legend small { color: #73858d; }
+.weekly-comparison-legend span { display: flex; align-items: center; gap: 6px; }
+.weekly-combined-period { margin-top: 26px; padding-top: 20px; border-top: 1px solid #edf1f2; }
+.weekly-period-dates { display: inline-block; margin-left: 8px; color: #73858d; font-size: .8rem; font-weight: 400; }
+.weekly-combined-period .weekly-chart-legend { border-top: 0; padding-top: 0; }
+.weekly-combined-svg { min-width: 800px; }
+.weekly-chart-controls { display: flex; align-items: flex-end; flex-wrap: wrap; gap: 14px; }
+.weekly-chart-toggle { display: flex; align-items: center; gap: 8px; min-height: 46px; color: #435860; font-size: .85rem; font-weight: 650; cursor: pointer; white-space: nowrap; }
+.weekly-chart-toggle input { width: 17px; height: 17px; margin: 0; accent-color: #129269; cursor: pointer; }
+.weekly-chart-toggle input:focus-visible { outline: 2px solid #20ae7d; outline-offset: 3px; }
+.weekly-chart-svg .weekly-chart-value { font-size: 10px; font-weight: 700; paint-order: stroke; stroke: #fff; stroke-width: 4px; stroke-linejoin: round; }
+.weekly-chart-summary { display: grid; gap: 4px; margin-top: 26px; }
+.weekly-chart-summary span { color: #647780; font-size: .85rem; }
+.weekly-chart-summary strong { color: #129269; font-size: 2rem; letter-spacing: -.04em; }
+.weekly-chart-summary small { color: #73858d; }
+.weekly-chart-scroll { overflow-x: auto; }
+.weekly-chart-svg { display: block; width: 100%; min-width: 530px; margin-top: 12px; }
+.weekly-chart-svg text { fill: #73858d; font-size: 12px; }
+.weekly-chart-empty { margin-top: 16px; color: #647780; font-size: .85rem; }
+.weekly-chart-legend { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 12px 24px; margin: 12px 0 0; padding: 18px 0 0; border-top: 1px solid #edf1f2; list-style: none; }
+.weekly-chart-legend li { display: flex; align-items: center; gap: 10px; font-size: .85rem; }
+.weekly-chart-swatch { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.weekly-chart-legend li div { display: grid; }
+.weekly-chart-legend small { color: #73858d; font-size: .72rem; }
+.weekly-chart-legend strong { margin-left: auto; white-space: nowrap; }
+.weekly-chart-details { margin-top: 20px; color: #647780; font-size: .8rem; }
+.weekly-chart-details summary { cursor: pointer; width: fit-content; }
+.weekly-chart-details table { border-collapse: collapse; margin-top: 12px; width: 100%; white-space: nowrap; }
+.weekly-chart-details th, .weekly-chart-details td { padding: 10px; border-bottom: 1px solid #edf1f2; text-align: right; }
+.weekly-chart-details caption { text-align: left; }
+@media (max-width: 560px) { .weekly-chart { padding: 16px; } .weekly-chart .select-field { width: 100%; } .weekly-chart-legend { grid-template-columns: 1fr; } }

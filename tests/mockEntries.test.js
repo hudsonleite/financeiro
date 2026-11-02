@@ -1,0 +1,21 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { generateMockEntries, appendMockEntries } from "../src/features/entries/mockEntries.js";
+import { validateEntries } from "../src/utils/entryValidation.js";
+
+test("examples cover September 1 to October 18 and preserve existing records without duplicates", () => {
+  const mock = generateMockEntries();
+  assert.ok(mock.every((entry) => entry.date >= "2026-09-01" && entry.date < "2026-10-19"));
+  assert.equal(mock.map((entry) => entry.date).sort()[0], "2026-09-01");
+  assert.equal(mock.map((entry) => entry.date).sort().at(-1), "2026-10-18");
+  assert.equal(mock.length, 240);
+  assert.equal(mock.filter((entry) => entry.date >= "2026-10-12" && entry.date <= "2026-10-18").length, 35);
+  validateEntries(mock);
+  assert.equal(new Set(mock.map((entry) => entry.date)).size, 48);
+  assert.ok(mock.every((entry) => entry.description.startsWith("[EXEMPLO]")));
+  const existing = { ...mock[0], id: "real", description: "Real" };
+  const combined = appendMockEntries([existing]);
+  assert.equal(combined[0], existing);
+  assert.equal(combined.length, 241);
+  assert.deepEqual(appendMockEntries(combined), combined);
+});
