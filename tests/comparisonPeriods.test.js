@@ -2,6 +2,19 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { getComparisonPeriods } from "../src/features/dashboard/comparisonPeriods.js";
 
+test("annual comparison includes current year plus the selected number of preceding years", () => {
+  const today = new Date(2026, 10, 2);
+  const records = [
+    { date: "2024-06-01", type: "entrada", amount: 150 },
+    { date: "2023-06-01", type: "entrada", amount: 900 },
+  ];
+  const periods = getComparisonPeriods(records, "year", "previous", today, null, 2);
+  assert.deepEqual(periods.map((period) => period.label), ["2026", "2025", "2024"]);
+  assert.equal(periods[2].income, 150);
+  assert.equal(getComparisonPeriods(records, "year", "previous", today, null, 0).length, 1);
+  assert.equal(getComparisonPeriods(records, "year", "previous", today, null, 12).length, 13);
+});
+
 test("selected base month drives both comparisons without affecting annual comparison", () => {
   const today = new Date(2026, 10, 2);
   const previous = getComparisonPeriods([], "month", "previous", today, "2025-01");

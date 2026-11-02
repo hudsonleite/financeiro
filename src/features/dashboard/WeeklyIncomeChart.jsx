@@ -18,6 +18,7 @@ export function WeeklyIncomeChart({ entries }) {
   const [activeTab, setActiveTab] = useState("columns");
   const [comparison, setComparison] = useState("week");
   const [monthComparison, setMonthComparison] = useState("previous");
+  const [previousYears, setPreviousYears] = useState("1");
   const [baseMonth, setBaseMonth] = useState(() => {
     const now = new Date();
     return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
@@ -32,7 +33,7 @@ export function WeeklyIncomeChart({ entries }) {
   const expenses = getWeeklyIncome(entries, Number(previousWeeks), today, "saida");
   const weeks = comparison === "week" ? incomes.map((week, index) => ({ income: week.total, expense: expenses[index].total,
     start: week.days[0].date, end: week.days[6].date, current: index === 0,
-  })) : getComparisonPeriods(entries, comparison, monthComparison, today, baseMonth);
+  })) : getComparisonPeriods(entries, comparison, monthComparison, today, baseMonth, Number(previousYears));
   const maximum = Math.max(1, ...weeks.flatMap((week) => [week.income, week.expense]));
   const magnitude = 10 ** Math.floor(Math.log10(maximum));
   const top = Math.ceil(maximum / magnitude) * magnitude;
@@ -68,7 +69,7 @@ export function WeeklyIncomeChart({ entries }) {
         <SelectField label="Mês base" options={monthOptions} value={baseMonth} onChange={setBaseMonth} />
         <SelectField label="Comparar mês base com" options={[{ value: "previous", label: "Mês anterior" }, { value: "lastYear", label: "Mesmo mês do ano anterior" }]} value={monthComparison} onChange={setMonthComparison} />
       </>}
-      {comparison === "year" && <p className="page-subtitle">Ano atual comparado ao ano anterior.</p>}
+      {comparison === "year" && <SelectField label="Comparar ano atual com" options={Array.from({ length: 13 }, (_, i) => ({ value: String(i), label: i === 0 ? "Somente ano atual" : `${i} ano${i > 1 ? "s" : ""} anterior${i > 1 ? "es" : ""}` }))} value={previousYears} onChange={setPreviousYears} />}
     </div>
     <p className="page-subtitle">Totais dos períodos completos, incluindo lançamentos em datas futuras. O período atual pode estar parcialmente preenchido.</p>
     <ul className="weekly-chart-legend">{series.map((item) => <li key={item.key}><span className="weekly-chart-swatch" style={{ background: item.color }} /><span>{item.label}</span></li>)}</ul>

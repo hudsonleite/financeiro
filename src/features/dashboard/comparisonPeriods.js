@@ -1,6 +1,6 @@
 import { toDateKey } from "../../utils/date.js";
 
-export function getComparisonPeriods(entries, mode, monthComparison = "previous", today = new Date(), baseMonth = null) {
+export function getComparisonPeriods(entries, mode, monthComparison = "previous", today = new Date(), baseMonth = null, previousYears = 1) {
   const year = mode === "month" && baseMonth ? Number(baseMonth.slice(0, 4)) : today.getFullYear();
   const month = mode === "month" && baseMonth ? Number(baseMonth.slice(5, 7)) - 1 : today.getMonth();
   const monthRange = (y, m, current) => ({
@@ -8,7 +8,7 @@ export function getComparisonPeriods(entries, mode, monthComparison = "previous"
     label: new Date(y, m, 1).toLocaleDateString("pt-BR", { month: "long", year: "numeric" }),
   });
   const ranges = mode === "year"
-    ? [year, year - 1].map((y) => ({ start: `${y}-01-01`, end: `${y}-12-31`, current: y === year, label: String(y) }))
+    ? Array.from({ length: previousYears + 1 }, (_, index) => year - index).map((y) => ({ start: `${y}-01-01`, end: `${y}-12-31`, current: y === year, label: String(y) }))
     : [monthRange(year, month, true), monthComparison === "previous" ? monthRange(year, month - 1, false) : monthRange(year - 1, month, false)];
   return ranges.map((range) => {
     let income = 0;
